@@ -1,5 +1,13 @@
 import numpy as np
+
+#h pour haut, b pour bas, g pour gauche, d pour droite
+
+
+#on fait une grille de point, on fait démarrer au mid et une touche fait un trait jusqu'au prochaine point
+#pour savoir le chemin on remplace les point par 'a',...
 def placer_pion_depart(n):
+    if n%2==0:
+        return False
     L1=[]
     for i in range(n):
         LL=[]
@@ -8,4 +16,6 @@ def placer_pion_depart(n):
         L1.append(LL)
     nbr_pion=int((n*((n/2)-1))/2)
     nbr_ligne=int(n/2-1)
+    L1=np.array(L1)
+    L1[int((n+1)/2-1),int((n+1)/2-1)]='1'
     return L1
