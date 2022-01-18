@@ -12,31 +12,33 @@ def placer_pion_depart(n):
     for i in range(n):
         LL=[]
         for j in range(n):
-            LL.append(0)
+            LL.append('0')
         L1.append(LL)
-    nbr_pion=int((n*((n/2)-1))/2)
-    nbr_ligne=int(n/2-1)
     L1=np.array(L1)
     L1[int((n+1)/2-1),int((n+1)/2-1)]='1'
     return L1
 
+def mouvement(L1,cox,coy,q):
+    if q%2==0:
+        p='vert'
+    else:
+        p='rouge'
 
-def mouvement(L1,cox,coy):
-    m=input('Ou allez-vous?')
+    m=input('Où allez-vous?')
     #if turn()%2==0: mettre du vert
     if m=='h':
-        L1[int(cox-1),int(coy)]=2
+        L1[int(cox-1),int(coy)]='h'
         cox=cox-1
     elif m=='d':
-        L1[int(cox),int(coy+1)]=3
+        L1[int(cox),int(coy+1)]='d'
         coy=coy+1
     elif m=='b':
-        L1[int(cox+1),int(coy)]=4
+        L1[int(cox+1),int(coy)]='b'
         cox=cox+1
     elif m=='g':
-        L1[int(cox),int(coy-1)]=5
+        L1[int(cox),int(coy-1)]='g'
         coy=coy-1
-    return L1,cox,coy
+    return L1,cox,coy,p
 
 def end():
     if turn()==10:
@@ -47,10 +49,12 @@ def game(n):
     q=0
     cox,coy=4,4
     while q!=10:
-        A=mouvement(L1,cox,coy)
+        A=mouvement(L1,cox,coy,q)
         print(A[0])
         cox=int(A[1])
         coy=int(A[2])
+        #joueur=A[3] #on a soit vert-> joueur 1 soit rouge ->joueur 2
         q=q+1
     return L1
 print(game(9))
+
