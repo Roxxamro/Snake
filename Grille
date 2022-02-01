@@ -1,6 +1,9 @@
 import numpy as np
 
-#h ↑ ↓ → ←
+# Faire le symbole "flèche vers la gauche" : Alt + 2 7 : ←
+# Faire le symbole "flèche vers la droite" : Alt + 2 6 : →
+# Faire le symbole "flèche vers le bas" : Alt + 2 5 : ↓
+# Faire le symbole "flèche vers le haut" : Alt + 2 4 : ↑
 
 
 #on fait une grille de point, on fait démarrer au mid et une touche fait un trait jusqu'au prochaine point
