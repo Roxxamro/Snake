@@ -43,21 +43,29 @@ def mouvement(L1,cox,coy,q):
     if m=='h':
         if L1[int(cox-1),int(coy)]=='XX':
             return perdu_joueur(q)
-        L1[int(cox-1),int(coy)]=p+'h'
+        elif L1[int(cox-1),int(coy)]=='b1' or L1[int(cox-1),int(coy)]=='b2':
+            return mouvement(L1,cox,coy,q)
+        L1[int(cox-1),int(coy)]='h'+p
         cox=cox-1
     elif m=='d':
         if L1[int(cox),int(coy+1)]=='XX':
             return perdu_joueur(q)
+        elif L1[int(cox),int(coy+1)]=='g1' or L1[int(cox),int(coy+1)]=='g2':
+            return mouvement(L1,cox,coy,q)
         L1[int(cox),int(coy+1)]='d'+p
         coy=coy+1
     elif m=='b':
         if L1[int(cox+1),int(coy)]=='XX':
             return perdu_joueur(q)
+        elif L1[int(cox+1),int(coy)]=='h1' or L1[int(cox+1),int(coy)]=='h2':
+            return mouvement(L1,cox,coy,q)
         L1[int(cox+1),int(coy)]='b'+p
         cox=cox+1
     elif m=='g':
         if L1[int(cox),int(coy-1)]=='XX':
             return perdu_joueur(q)
+        elif L1[int(cox),int(coy-1)]=='d1' or L1[int(cox),int(coy-1)]=='d2':
+            return mouvement(L1,cox,coy,q)
         L1[int(cox),int(coy-1)]='g'+p
         coy=coy-1
     return L1,cox,coy,p
@@ -82,5 +90,4 @@ def game(n):
         q=q+1
     return L1
 print(game(9))
-
 
