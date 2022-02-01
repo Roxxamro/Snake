@@ -7,86 +7,22 @@ import numpy as np
 #pour savoir le chemin on remplace les point par 'a',...
 def placer_pion_depart(n):
     if n%2==0:
-        return False
-    L1=[]
-    for i in range(n):
-        LL=[]
-        for j in range(n):
-            LL.append('0')
-        L1.append(LL)
-    L1=np.array(L1)
-    L1[int((n+1)/2-1),int((n+1)/2-1)]='1'
-    return L1
-
-def mouvement(L1,cox,coy,q):
-    if q%2==0:
-        p='vert'
-    else:
-        p='rouge'
-
-    m=input('Où allez-vous?')
-    #if turn()%2==0: mettre du vert
-    if m=='h':
-        L1[int(cox-1),int(coy)]='h'
-        cox=cox-1
-    elif m=='d':
-        L1[int(cox),int(coy+1)]='d'
-        coy=coy+1
-    elif m=='b':
-        L1[int(cox+1),int(coy)]='b'
-        cox=cox+1
-    elif m=='g':
-        L1[int(cox),int(coy-1)]='g'
-        coy=coy-1
-    return L1,cox,coy,p
-
-def end():
-    if turn()==10:
-        return True
-
-def game(n):
-    L1=placer_pion_depart(n)
-    q=0
-    cox,coy=4,4
-    while q!=10:
-        A=mouvement(L1,cox,coy,q)
-        print(A[0])
-        cox=int(A[1])
-        coy=int(A[2])
-        #joueur=A[3] #on a soit vert-> joueur 1 soit rouge ->joueur 2
-        q=q+1
-    return L1
-print(game(9))
-
-
-New________________________________________________________________________________________________________________________________________________
-
-
-import numpy as np
-
-#h pour haut=2, b pour bas=4, g pour gauche=5, d pour droite=3
-
-
-#on fait une grille de point, on fait démarrer au mid et une touche fait un trait jusqu'au prochaine point
-#pour savoir le chemin on remplace les point par 'a',...
-def placer_pion_depart(n):
-    if n%2==0:
         print('Rentrez une valeur impair')
         return False
     L1=[]
     LX=[]
     for i in range(n+2):
-        LX.append('X')
+        LX.append('XX')
     L1.append(LX)
     for i in range(n):
-        LL=['X']
+        LL=['XX']
         for j in range(n):
-            LL.append('0')
-        LL.append('X')
+            LL.append('00')
+        LL.append('XX')
         L1.append(LL)
     L1.append(LX)
     L1=np.array(L1)
-    L1[int((n+1)/2),int((n+1)/2)]='1'
+    L1[int((n+1)/2),int((n+1)/2)]='11'
     return L1
 
 def perdu_joueur(q):
@@ -98,31 +34,31 @@ def perdu_joueur(q):
 
 def mouvement(L1,cox,coy,q):
     if q%2==0:
-        p='vert'
+        p='1'   #vert
     else:
-        p='rouge'
+        p='2'   #rouge
     m=input('Où allez-vous?')
     #if turn()%2==0: mettre du vert
     print(cox,coy)
     if m=='h':
-        if L1[int(cox-1),int(coy)]=='X':
+        if L1[int(cox-1),int(coy)]=='XX':
             return perdu_joueur(q)
-        L1[int(cox-1),int(coy)]='h'
+        L1[int(cox-1),int(coy)]=p+'h'
         cox=cox-1
     elif m=='d':
-        if L1[int(cox),int(coy+1)]=='X':
+        if L1[int(cox),int(coy+1)]=='XX':
             return perdu_joueur(q)
-        L1[int(cox),int(coy+1)]='d'
+        L1[int(cox),int(coy+1)]='d'+p
         coy=coy+1
     elif m=='b':
-        if L1[int(cox+1),int(coy)]=='X':
+        if L1[int(cox+1),int(coy)]=='XX':
             return perdu_joueur(q)
-        L1[int(cox+1),int(coy)]='b'
+        L1[int(cox+1),int(coy)]='b'+p
         cox=cox+1
     elif m=='g':
-        if L1[int(cox),int(coy-1)]=='X':
+        if L1[int(cox),int(coy-1)]=='XX':
             return perdu_joueur(q)
-        L1[int(cox),int(coy-1)]='g'
+        L1[int(cox),int(coy-1)]='g'+p
         coy=coy-1
     return L1,cox,coy,p
 
