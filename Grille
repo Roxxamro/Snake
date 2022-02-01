@@ -1,9 +1,6 @@
 import numpy as np
 
-# Faire le symbole "flèche vers la gauche" : Alt + 2 7 : ←
-# Faire le symbole "flèche vers la droite" : Alt + 2 6 : →
-# Faire le symbole "flèche vers le bas" : Alt + 2 5 : ↓
-# Faire le symbole "flèche vers le haut" : Alt + 2 4 : ↑
+#h pour haut=2, b pour bas=4, g pour gauche=5, d pour droite=3
 
 
 #on fait une grille de point, on fait démarrer au mid et une touche fait un trait jusqu'au prochaine point
@@ -15,17 +12,17 @@ def placer_pion_depart(n):
     L1=[]
     LX=[]
     for i in range(n+2):
-        LX.append('XX')
+        LX.append('XXX')
     L1.append(LX)
     for i in range(n):
-        LL=['XX']
+        LL=['XXX']
         for j in range(n):
-            LL.append('00')
-        LL.append('XX')
+            LL.append('000')
+        LL.append('XXX')
         L1.append(LL)
     L1.append(LX)
     L1=np.array(L1)
-    L1[int((n+1)/2),int((n+1)/2)]='11'
+    L1[int((n+1)/2),int((n+1)/2)]='111'
     return L1
 
 def perdu_joueur(q):
@@ -44,38 +41,38 @@ def mouvement(L1,cox,coy,q):
     #if turn()%2==0: mettre du vert
     print(cox,coy)
     if m=='h':
-        if L1[int(cox-1),int(coy)]=='XX':
+        if L1[int(cox-1),int(coy)]=='XXX':
             return perdu_joueur(q)
-        elif L1[int(cox-1),int(coy)]=='b1' or L1[int(cox-1),int(coy)]=='b2':
+        elif L1[int(cox-1),int(coy)][1]=='V':
             return mouvement(L1,cox,coy,q)
-        L1[int(cox-1),int(coy)]='h'+p
+        L1[int(cox-1),int(coy)]='hV'+p
         cox=cox-1
     elif m=='d':
-        if L1[int(cox),int(coy+1)]=='XX':
+        if L1[int(cox),int(coy+1)]=='XXX':
             return perdu_joueur(q)
-        elif L1[int(cox),int(coy+1)]=='g1' or L1[int(cox),int(coy+1)]=='g2':
+        elif L1[int(cox),int(coy+1)][1]=='H':
             return mouvement(L1,cox,coy,q)
-        L1[int(cox),int(coy+1)]='d'+p
+        L1[int(cox),int(coy+1)]='dH'+p
         coy=coy+1
     elif m=='b':
-        if L1[int(cox+1),int(coy)]=='XX':
+        if L1[int(cox+1),int(coy)]=='XXX':
             return perdu_joueur(q)
-        elif L1[int(cox+1),int(coy)]=='h1' or L1[int(cox+1),int(coy)]=='h2':
+        elif L1[int(cox+1),int(coy)][1]=='V':
             return mouvement(L1,cox,coy,q)
-        L1[int(cox+1),int(coy)]='b'+p
+        L1[int(cox+1),int(coy)]='bV'+p
         cox=cox+1
     elif m=='g':
-        if L1[int(cox),int(coy-1)]=='XX':
+        if L1[int(cox),int(coy-1)]=='XXX':
             return perdu_joueur(q)
-        elif L1[int(cox),int(coy-1)]=='d1' or L1[int(cox),int(coy-1)]=='d2':
+        elif L1[int(cox),int(coy-1)][1]=='H':
             return mouvement(L1,cox,coy,q)
-        L1[int(cox),int(coy-1)]='g'+p
+        L1[int(cox),int(coy-1)]='gH'+p
         coy=coy-1
     return L1,cox,coy,p
 
 
 def end():
-    if turn()==10:
+    if turn()==20:
         return True
 
 def game(n):
@@ -84,7 +81,7 @@ def game(n):
         return False
     q=0
     cox,coy=5,5
-    while q!=10:
+    while q!=20:
         A=mouvement(L1,cox,coy,q)
         print(A[0])
         cox=int(A[1])
@@ -93,4 +90,5 @@ def game(n):
         q=q+1
     return L1
 print(game(9))
+
 
