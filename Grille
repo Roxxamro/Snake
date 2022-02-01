@@ -1,6 +1,6 @@
 import numpy as np
 
-#h pour haut=2, b pour bas=4, g pour gauche=5, d pour droite=3
+#h ↑ ↓ → ←
 
 
 #on fait une grille de point, on fait démarrer au mid et une touche fait un trait jusqu'au prochaine point
